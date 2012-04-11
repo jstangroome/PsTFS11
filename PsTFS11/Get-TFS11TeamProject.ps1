@@ -18,7 +18,8 @@ function Get-TFS11TeamProject {
             $Collection = Get-TFS11TeamProjectCollection -CollectionUri $Collection
         }
 
-        $StructureService = $Collection.GetService($MTF['Server.ICommonStructureService4'])
+        # TODO $StructureService = $Collection.GetService($MTF['Server.ICommonStructureService4'])
+        $StructureService = $Collection.GetService($MTF['Server.ICommonStructureService3'])
         if ($All) {
             $Projects = $StructureService.ListAllProjects()
         } else {
