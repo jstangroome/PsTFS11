@@ -8,7 +8,7 @@ function Get-TFS11Identity {
 
         [Parameter(ParameterSetName='Search', Mandatory=$true, Position = 1)]
         [Alias('DisplayName', 'AccountName')]
-        [string]
+        [string[]]
         $Name,
 
         [Parameter(ParameterSetName='Search')]
@@ -33,7 +33,8 @@ function Get-TFS11Identity {
             $IdentityManagementService.ReadIdentities($Descriptor, $Membership, $Options)
         }
         default {
-            $IdentityManagementService.ReadIdentity($SearchFactor, $Name, $Membership, $Options)
+            $IdentityManagementService.ReadIdentities($SearchFactor, $Name, $Membership, $Options) |
+                ForEach-Object { $_ } # unroll nested arrays
         }
     }
 }
