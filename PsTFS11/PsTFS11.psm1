@@ -23,3 +23,5 @@ Add-Type -Path $PSScriptRoot\BuildPermissions.cs
 . $PSScriptRoot\Get-TFS11Identity.ps1
 . $PSScriptRoot\Get-TFS11BuildPermission.ps1
 . $PSScriptRoot\Set-TFS11BuildPermission.ps1
+
+. $PSScriptRoot\Get-TFS11LabEnvironment.ps1
