@@ -37,5 +37,46 @@
                 </TableRowEntries>
             </TableControl>
         </View>
+        <View>
+            <Name>Microsoft.TeamFoundation.Framework.Client.Subscription</Name>
+            <ViewSelectedBy>
+                <TypeName>Microsoft.TeamFoundation.Framework.Client.Subscription</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableHeaders>
+                    <TableColumnHeader>
+                        <Width>6</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>26</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Delivery Type</Label>
+                        <Width>16</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Delivery Address</Label>
+                    </TableColumnHeader>
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>ID</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>EventType</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>$_.DeliveryPreference.Type</ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>$_.DeliveryPreference.Address</ScriptBlock>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
     </ViewDefinitions>
 </Configuration>
