@@ -1,11 +1,17 @@
 function Get-TFS11TeamProjectCollection {
     [CmdletBinding(DefaultParameterSetName='Collection')]
+    [OutputType([Microsoft.TeamFoundation.Client.TfsTeamProjectCollection, Microsoft.TeamFoundation.Client, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a])]
     param (
         [Parameter(Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true, ParameterSetName='Collection')]
         [ValidatePattern('^https?://')]
         [Alias('Uri')]
-        [string]
+        [Uri]
         $CollectionUri,
+
+        [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName=$true, ParameterSetName='Collection')]
+        [System.Management.Automation.PSCredential]
+        [System.Management.Automation.Credential()]
+        $Credential = [System.Management.Automation.PSCredential]::Empty,
 
         [Parameter(Mandatory=$true, ParameterSetName='Server')]
         [Alias('Server')]
@@ -39,7 +45,13 @@ function Get-TFS11TeamProjectCollection {
                     }
             }
             Collection {
-                $CollectionFactoryType::GetTeamProjectCollection($CollectionUri)
+                $TfsCred = $MTF['Client.TfsClientCredentials']
+                $CollectionArgs = @($CollectionUri)
+                if ($Credential -ne [System.Management.Automation.PSCredential]::Empty) {
+                    $WindowsCred = New-Object -TypeName $MTF['Client.WindowsCredential'] -ArgumentList $Credential.GetNetworkCredential()
+                    $CollectionArgs += New-Object -TypeName $MTF['Client.TfsClientCredentials'] -ArgumentList $WindowsCred
+                }
+                New-Object -TypeName $MTF['Client.TfsTeamProjectCollection'] -ArgumentList $CollectionArgs
             }
         }
     }
