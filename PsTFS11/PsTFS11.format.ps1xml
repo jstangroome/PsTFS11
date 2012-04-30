@@ -1,0 +1,41 @@
+<Configuration>
+    <ViewDefinitions>
+        <View>
+            <Name>Microsoft.TeamFoundation.Build.Client.IBuildDefinition</Name>
+            <ViewSelectedBy>
+                <!-- <TypeName>Microsoft.TeamFoundation.Build.Client.IBuildDefinition, Microsoft.TeamFoundation.Build.Client, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</TypeName>
+                <TypeName>Microsoft.TeamFoundation.Build.Client.IBuildDefinition</TypeName> -->
+                <TypeName>Microsoft.TeamFoundation.Build.Client.BuildDefinition</TypeName>
+            </ViewSelectedBy>
+            <GroupBy>
+                <PropertyName>TeamProject</PropertyName>
+            </GroupBy>
+            <TableControl>
+                <TableHeaders>
+                    <TableColumnHeader />
+                    <TableColumnHeader>
+                        <Width>12</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>28</Width>
+                    </TableColumnHeader>
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>Name</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>QueueStatus</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>ContinuousIntegrationType</PropertyName>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>
