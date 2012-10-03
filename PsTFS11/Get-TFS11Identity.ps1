@@ -3,7 +3,6 @@ function Get-TFS11Identity {
     param (
         [Parameter(Mandatory=$true, Position = 0)]
         [Alias('Collection', 'Server', 'ConfigurationServer')]
-        [Microsoft.TeamFoundation.Client.TfsConnection, Microsoft.TeamFoundation.Client, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]
         $Connection,
 
         [Parameter(ParameterSetName='Search', Mandatory=$true, Position = 1)]
@@ -25,6 +24,15 @@ function Get-TFS11Identity {
         [Microsoft.TeamFoundation.Framework.Common.ReadIdentityOptions, Microsoft.TeamFoundation.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]
         $Options = 'None'
     )
+
+    if ($Connection -is [string] -or $Connection -is [uri]) {
+        $Connection = Get-TFS11TeamProjectCollection -CollectionUri $Connection
+        # what about configuration server uris?
+    }
+
+    if ($Connection -isnot $MTF['Client.TfsConnection']) {
+        throw "Invalid Connection"
+    }
 
     $IdentityManagementService = $Connection.GetService($MTF['Framework.Client.IIdentityManagementService2'])
 
