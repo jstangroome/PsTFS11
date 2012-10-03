@@ -2,7 +2,8 @@ Set-StrictMode -Version Latest
 $script:ErrorActionPreference = 'Stop'
 
 if ($PSVersionTable.CLRVersion.Major -ge 4) {
-    Add-Type -AssemblyName 'Microsoft.TeamFoundation.Build.Workflow, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
+    #Add-Type -AssemblyName 'Microsoft.TeamFoundation.Build.Workflow, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
+    #TODO get from referenceassemblies instead of GAC
 }
 
 # create an index of public Microsoft.TeamFoundation.* types from the version 11 API only
