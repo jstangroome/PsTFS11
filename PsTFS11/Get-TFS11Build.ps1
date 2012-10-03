@@ -40,11 +40,12 @@ function Get-TFS11Build {
         $FinishedAfter
     )
 
+    if ($Collection -is [string] -or $Collection -is [Uri]) {
+        $Collection = Get-TFS11TeamProjectCollection -CollectionUri $Collection
+    }
+    $BuildServer = $Collection.GetService($MTF['Build.Client.IBuildServer'])
+
     if ($PSCmdlet.ParameterSetName -eq 'Uri') {
-        if ($Collection -is [string] -or $Collection -is [Uri]) {
-            $Collection = Get-TFS11TeamProjectCollection -CollectionUri $Collection
-        }
-        $BuildServer = $Collection.GetService($MTF['Build.Client.IBuildServer'])
 
         return $BuildServer.GetBuild($BuildUri)
     }
