@@ -36,7 +36,7 @@ function Get-TFS11Identity {
 
     $IdentityManagementService = $Connection.GetService($MTF['Framework.Client.IIdentityManagementService2'])
 
-    switch ($PSCmdlet.ParameterSetname) {
+    switch ($PSCmdlet.ParameterSetName) {
         Descriptor {
             $IdentityManagementService.ReadIdentities($Descriptor, $Membership, $Options)
         }
