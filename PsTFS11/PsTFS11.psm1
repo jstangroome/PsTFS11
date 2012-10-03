@@ -24,6 +24,7 @@ $script:MTF = @{}
         }
     }
 
+Add-Type -Path $PSScriptRoot\AuthorizationProjectPermissions.cs
 Add-Type -Path $PSScriptRoot\BuildPermissions.cs
 
 . $PSScriptRoot\Get-TFS11ConfigurationServer.ps1
@@ -32,6 +33,9 @@ Add-Type -Path $PSScriptRoot\BuildPermissions.cs
 . $PSScriptRoot\Get-TFS11Identity.ps1
 . $PSScriptRoot\Get-TFS11BuildPermission.ps1
 . $PSScriptRoot\Set-TFS11BuildPermission.ps1
+
+. $PSScriptRoot\Get-TFS11TeamProjectPermission.ps1
+. $PSScriptRoot\Set-TFS11TeamProjectPermission.ps1
 
 . $PSScriptRoot\Get-TFS11LabEnvironment.ps1
 
