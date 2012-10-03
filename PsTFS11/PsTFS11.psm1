@@ -43,3 +43,5 @@ Add-Type -Path $PSScriptRoot\BuildPermissions.cs
 
 . $PSScriptRoot\Get-TFS11EventSubscription.ps1
 . $PSScriptRoot\Remove-TFS11EventSubscription.ps1
+
+. $PSScriptRoot\Set-TFS11SourcePermission.ps1
