@@ -2,11 +2,11 @@ function Get-TFS11BuildPermission {
     [CmdletBinding()]
     [OutputType('PsTFS11.AccessControlEntry')]
     param (
-        [Parameter(Mandatory=$true)]
         $Collection,
 
         [Parameter(Mandatory=$true)]
-        $ProjectName,
+        [Alias('ProjectName')]
+        $Project,
 
         [Microsoft.TeamFoundation.Build.Client.IBuildDefinition, Microsoft.TeamFoundation.Build.Client, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]
         $BuildDefinition,
@@ -15,14 +15,31 @@ function Get-TFS11BuildPermission {
         $Descriptor = @()
     )
 
+    if ($Project -is $MTF['Server.ProjectInfo']) {
+        if ($Project.Collection) {
+            $Collection = $Project.Collection
+        }
+    }
+
     if ($Collection -is [string] -or $Collection -is [Uri]) {
         $Collection = Get-TFS11TeamProjectCollection -CollectionUri $Collection
+    }
+
+    if (-not $Collection) {
+        throw 'Collection parameter required'
+    }
+
+    if ($Project -is [string]) {
+        $Project = Get-TFS11TeamProject -Collection $Collection -ProjectName $ProjectName
+    }
+
+    if (-not $Project) {
+        throw 'Project parameter required'
     }
 
     $SecurityService = $Collection.GetService($MTF['Framework.Client.ISecurityService'])
     $BuildSecurityNamespace = $SecurityService.GetSecurityNamespace($MTF['Build.Common.BuildSecurity']::BuildNamespaceId)
 
-    $Project = Get-TFS11TeamProject -Collection $Collection -ProjectName $ProjectName
     $SecurityToken = $MTF['LinkingUtilities']::DecodeUri($Project.Uri).ToolSpecificId
 
     if ($BuildDefinition) {
