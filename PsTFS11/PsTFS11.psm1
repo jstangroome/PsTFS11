@@ -40,6 +40,12 @@ Add-Type -Path $PSScriptRoot\BuildPermissions.cs
 . $PSScriptRoot\Get-TFS11TeamProjectPermission.ps1
 . $PSScriptRoot\Set-TFS11TeamProjectPermission.ps1
 
+# TODO Add-,Get-TFSTeamProjectArea
+# TODO Add-TFSTeamProjectGroup
+# TODO New-TFSAccessControlEntry, Add-TFSTeamProjectNodeAccess
+
+. $PSScriptRoot\Get-TFS11WorkItemType.ps1
+
 . $PSScriptRoot\Get-TFS11LabEnvironment.ps1
 
 . $PSScriptRoot\Get-TFS11BuildDefinition.ps1
