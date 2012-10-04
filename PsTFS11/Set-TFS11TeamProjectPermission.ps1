@@ -1,4 +1,4 @@
-function Set-TFSTeamProjectPermission {
+function Set-TFS11TeamProjectPermission {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true, Position = 0)]
