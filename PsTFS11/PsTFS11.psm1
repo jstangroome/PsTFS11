@@ -46,6 +46,9 @@ Add-Type -Path $PSScriptRoot\BuildPermissions.cs
 
 . $PSScriptRoot\Get-TFS11WorkItemType.ps1
 
+# TODO Add-,Get-TFSWITProjectQueryFolder
+# TODO Add-TFSWITProjectQueryDefinition
+
 . $PSScriptRoot\Get-TFS11LabEnvironment.ps1
 
 . $PSScriptRoot\Get-TFS11BuildDefinition.ps1
@@ -55,6 +58,7 @@ Add-Type -Path $PSScriptRoot\BuildPermissions.cs
 . $PSScriptRoot\Get-TFS11Build.ps1
 
 . $PSScriptRoot\Get-TFS11EventSubscription.ps1
+. $PSScriptRoot\Add-TFS11EventSubscription.ps1
 . $PSScriptRoot\Remove-TFS11EventSubscription.ps1
 
 . $PSScriptRoot\Set-TFS11SourcePermission.ps1
