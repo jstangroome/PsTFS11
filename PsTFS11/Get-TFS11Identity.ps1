@@ -1,4 +1,5 @@
 function Get-TFS11Identity {
+    [OutputType([Microsoft.TeamFoundation.Framework.Client.TeamFoundationIdentity, Microsoft.TeamFoundation.Client, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a])]
     [CmdletBinding(DefaultParameterSetName='Search')]
     param (
         [Parameter(Mandatory=$true, Position = 0)]
@@ -22,7 +23,10 @@ function Get-TFS11Identity {
         $Membership = 'None',
 
         [Microsoft.TeamFoundation.Framework.Common.ReadIdentityOptions, Microsoft.TeamFoundation.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a]
-        $Options = 'None'
+        $Options = 'None',
+
+        [switch]
+        $IncludeInactive
     )
 
     if ($Connection -is [string] -or $Connection -is [uri]) {
@@ -38,11 +42,13 @@ function Get-TFS11Identity {
 
     switch ($PSCmdlet.ParameterSetName) {
         Descriptor {
-            $IdentityManagementService.ReadIdentities($Descriptor, $Membership, $Options)
+            $Result = $IdentityManagementService.ReadIdentities($Descriptor, $Membership, $Options)
         }
         default {
-            $IdentityManagementService.ReadIdentities($SearchFactor, $Name, $Membership, $Options) |
-                ForEach-Object { $_ } # unroll nested arrays
+            $ResultSet = $IdentityManagementService.ReadIdentities($SearchFactor, $Name, $Membership, $Options)
+            $Result = $ResultSet | % { $_ } # unroll
         }
     }
+
+    $Result | Where-Object { $IncludeInactive -or $_.IsActive }
 }
