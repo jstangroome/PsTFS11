@@ -28,7 +28,10 @@ Add-Type -Path $PSScriptRoot\AuthorizationProjectPermissions.cs
 Add-Type -Path $PSScriptRoot\BuildPermissions.cs
 
 . $PSScriptRoot\Get-TFS11ConfigurationServer.ps1
+
 . $PSScriptRoot\Get-TFS11TeamProjectCollection.ps1
+. $PSScriptRoot\Remove-TFS11TeamProjectCollection.ps1
+
 . $PSScriptRoot\Get-TFS11TeamProject.ps1
 . $PSScriptRoot\Get-TFS11Identity.ps1
 . $PSScriptRoot\Get-TFS11BuildPermission.ps1
