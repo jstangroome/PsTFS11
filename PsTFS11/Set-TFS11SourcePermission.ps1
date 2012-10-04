@@ -39,6 +39,9 @@
     if ($Identity -is $MTF['Framework.Client.TeamFoundationIdentity']) {
         $Identity = $Identity.Descriptor
     }
+    if (-not $Identity -or $Identity -isnot $MTF['Framework.Client.IdentityDescriptor']) {
+        throw "Invalid Identity."
+    }
 
     $SecurityService = $Collection.GetService($MTF['Framework.Client.ISecurityService'])
     $RepositorySecurityNamespace = $SecurityService.GetSecurityNamespace($MTF['VersionControl.Common.SecurityConstants']::RepositorySecurityNamespaceGuid)
