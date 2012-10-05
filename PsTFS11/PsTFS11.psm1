@@ -69,3 +69,6 @@ Add-Type -Path $PSScriptRoot\BuildPermissions.cs
 . $PSScriptRoot\Set-TFS11SourcePermission.ps1
 
 . $PSScriptRoot\Add-Tfs11BackwardCompatibilityAlias.ps1
+
+. $PSScriptRoot\Get-TFS11NotificationSettings.ps1
+. $PSScriptRoot\Set-TFS11NotificationSettings.ps1
