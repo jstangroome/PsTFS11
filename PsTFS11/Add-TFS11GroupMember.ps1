@@ -24,7 +24,7 @@
     }
 
     if ($Group -is [string]) {
-        $GroupName = $Identity
+        $GroupName = $Group
         $Group = Get-TFS11Identity -Connection $Connection -Name $GroupName -SearchFactor DisplayName -Options IncludeReadFromSource |
             Select-Object -First 1
         if (-not $Group) {
@@ -40,7 +40,7 @@
     }
 
     if ($Member -is [string]) {
-        $MemberName = $Identity
+        $MemberName = $Member
         $Member = Get-TFS11Identity -Connection $Connection -Name $MemberName -SearchFactor AccountName -Options IncludeReadFromSource |
             Select-Object -First 1
         if (-not $Member) {
