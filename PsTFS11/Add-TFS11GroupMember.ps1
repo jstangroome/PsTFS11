@@ -2,6 +2,7 @@
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
+        [Alias('CollectionUri')]
         [ValidateNotNullOrEmpty()]
         $Connection,
 
